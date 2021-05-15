@@ -1,8 +1,8 @@
 package priv.ljh.uniapp.service.impl;
 
-import priv.ljh.uniapp.entity.TUser;
-import priv.ljh.uniapp.mapper.TUserMapper;
-import priv.ljh.uniapp.service.TUserService;
+import priv.ljh.uniapp.entity.UpUser;
+import priv.ljh.uniapp.mapper.UpUserMapper;
+import priv.ljh.uniapp.service.UpUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-05-15
  */
 @Service
-public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements TUserService {
+public class UpUserServiceImpl extends ServiceImpl<UpUserMapper, UpUser> implements UpUserService {
 
 }

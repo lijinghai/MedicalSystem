@@ -1,6 +1,6 @@
 package priv.ljh.uniapp.mapper;
 
-import priv.ljh.uniapp.entity.TUser;
+import priv.ljh.uniapp.entity.UpUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author lijinghai
  * @since 2021-05-15
  */
-public interface TUserMapper extends BaseMapper<TUser> {
+public interface UpUserMapper extends BaseMapper<UpUser> {
 
 }
