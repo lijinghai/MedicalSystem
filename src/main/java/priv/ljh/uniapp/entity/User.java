@@ -1,4 +1,4 @@
-package priv.ljh.operate.entity;
+package priv.ljh.uniapp.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
@@ -23,13 +23,13 @@ import org.springframework.format.annotation.DateTimeFormat;
  * </p>
  *
  * @author lijinghai
- * @since 2021-01-29
+ * @since 2021-05-28
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Log对象", description="")
-public class Log implements Serializable {
+@ApiModel(value="User对象", description="")
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,24 +37,32 @@ public class Log implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "账号")
+    private String account;
+
+    @ApiModelProperty(value = "密码")
+    private String password;
+
     @ApiModelProperty(value = "用户名")
-    private String username;
+    private String name;
 
-    @ApiModelProperty(value = "IP")
-    private String ip;
+    @ApiModelProperty(value = "角色")
+    private Integer roleType;
 
-    @ApiModelProperty(value = "IP来源")
-    @TableField("ipAddress")
-    private String ipAddress;
+    @ApiModelProperty(value = "性别")
+    private Integer sex;
 
-    @ApiModelProperty(value = "描述")
-    private String description;
+    @ApiModelProperty(value = "年龄")
+    private Integer age;
 
-    @ApiModelProperty(value = "浏览器")
-    private String browser;
+    @ApiModelProperty(value = "手机号")
+    private String mobile;
+
+    @ApiModelProperty(value = "邮箱")
+    private String email;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
