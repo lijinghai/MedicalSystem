@@ -55,9 +55,6 @@ public class User implements Serializable {
     @ApiModelProperty(value = "年龄")
     private Integer age;
 
-    @ApiModelProperty(value = "手机号")
-    private String mobile;
-
     @ApiModelProperty(value = "邮箱")
     private String email;
 
