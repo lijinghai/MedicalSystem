@@ -46,27 +46,19 @@ public class User implements Serializable {
     @ApiModelProperty(value = "用户名")
     private String name;
 
-    @ApiModelProperty(value = "角色")
+    @ApiModelProperty(value = "角色(医生：1；患者：2)")
     private Integer roleType;
 
-    @ApiModelProperty(value = "性别")
+    @ApiModelProperty(value = "性别(男：1；女：2)")
     private Integer sex;
 
     @ApiModelProperty(value = "年龄")
     private Integer age;
 
+    @ApiModelProperty(value = "手机号")
+    private String mobile;
+
     @ApiModelProperty(value = "邮箱")
     private String email;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @ApiModelProperty(value = "逻辑删除")
-    @TableLogic
-    private Integer deleted;
-
 
 }
