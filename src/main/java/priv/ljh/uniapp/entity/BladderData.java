@@ -39,9 +39,7 @@ public class BladderData implements Serializable {
     @ApiModelProperty(value = "排尿期最大逼尿肌压(cmH2O)")
     private Double bladderDetrusorPressure;
 
-    @ApiModelProperty(value = "
-
-膀胱顺应性(ml/cmH2O)")
+    @ApiModelProperty(value = "膀胱顺应性(ml/cmH2O)")
     private Double bladderCompliance;
 
     @ApiModelProperty(value = "记录")
