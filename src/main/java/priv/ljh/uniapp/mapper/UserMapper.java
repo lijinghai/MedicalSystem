@@ -19,6 +19,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 @Repository
 @ApiModel("用户信息接口类")
 public interface UserMapper extends BaseMapper<User> {
+
+    /**
+     * 自定义查询方法
+     * @param user
+     * @return
+     */
     @Select("select * from user where account = #{account} and password= #{password}")
     User login(User user);
 }

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import priv.ljh.uniapp.entity.BladderData;
+
 import priv.ljh.uniapp.entity.PatientData;
 import priv.ljh.uniapp.mapper.PatientDataMapper;
 import priv.ljh.uniapp.service.PatientDataService;
