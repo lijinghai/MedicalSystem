@@ -42,7 +42,10 @@ public class BladderDataController {
     public ResultResponse create(@RequestBody BladderData bladderData){
         ResultResponse res = null;
         int id = RandomUtil.randomInt(10000);
-        bladderDataMapper.insert(bladderData);
+//        bladderDataMapper.insert(bladderData);
+        bladderDataMapper.insertBladder();
+        bladderData.getId();
+        log.info("id========>"+bladderData.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, bladderData);
         return res;
     }
@@ -62,6 +65,11 @@ public class BladderDataController {
     public ResultResponse updateBladderData(@RequestBody BladderData bladderData){
         ResultResponse res = null;
         bladderDataMapper.updateById(bladderData);
+        Integer id1 = bladderData.getId();
+        Integer id2 = bladderData.getPatientDataId();
+        log.info("bladderData.getId()=======>"+bladderData.getId());
+        log.info("bladderData.getPatientDataId()======>"+bladderData.getPatientDataId());
+        bladderDataMapper.updateBladder(id1,id2);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, bladderData);
         return res;
     }

@@ -3,6 +3,7 @@ package priv.ljh.uniapp.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.mysql.cj.xdevapi.InsertParams;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -102,6 +103,7 @@ public class UserController {
         int id = RandomUtil.randomInt(10000);
         userMapper.insert(user);
         log.info("id===========>"+user.getId());
+        // 添加到病患资料表
         patientDataMapper.InsertPatient(user.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, user);
         return res;

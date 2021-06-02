@@ -62,6 +62,7 @@ public class PatientDataController {
     public ResultResponse updatePatientData (@RequestBody PatientData patientData){
         ResultResponse res = null;
         patientDataMapper.updateById(patientData);
+
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, patientData);
         return res;
     }
