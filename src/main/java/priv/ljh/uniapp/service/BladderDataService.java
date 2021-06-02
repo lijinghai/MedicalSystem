@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import priv.ljh.utils.MyPage;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,4 +25,15 @@ public interface BladderDataService extends IService<BladderData> {
      * @return
      */
     public MyPage searchBladderData(int pageNo, int limit, String idSorted, List<BladderData> bladderData);
+
+
+    /**
+     * 根据id查询
+     * @param pageNo
+     * @param limit
+     * @param idSorted
+     * @param info
+     * @return
+     */
+    public MyPage searchBladderDataById(int pageNo, int limit, String idSorted, List<Map> info);
 }

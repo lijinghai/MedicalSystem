@@ -16,6 +16,7 @@ import priv.ljh.utils.MyPage;
 import priv.ljh.utils.ResultResponse;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -83,6 +84,17 @@ public class BladderDataController {
         log.info("bladderData====>"+bladderData);
         MyPage page = this.bladderDataService.searchBladderData(pageNo, limit, idSort,bladderData);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, page);
+        return res;
+    }
+
+    @ApiOperation("根据id查询信息")
+    @GetMapping("/id")
+    public ResultResponse queryBladderDataById(@RequestParam("id") Integer id,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        List<Map> info = bladderDataMapper.infoBladder(id);
+        log.info("info====>"+info);
+        MyPage page = this.bladderDataService.searchBladderDataById(pageNo, limit, idSort,info);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
         return res;
     }
 
