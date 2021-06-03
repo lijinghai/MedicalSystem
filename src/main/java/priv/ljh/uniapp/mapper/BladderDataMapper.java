@@ -36,18 +36,8 @@ public interface BladderDataMapper extends BaseMapper<BladderData> {
      * @param id2
      * @return
      */
-    @Update("update patient_data ,bladder_data set patient_data.bladder_id = #{id} where patient_data.id = #{patient_data_id};")
-    int updateBladder(@Param("id") Integer id1,@Param("patient_data_id") Integer id2);
-
-    /**
-     * 根据id更新语句
-     * @param id1
-     * @param id2
-     * @param id3
-     * @return
-     */
-    @Update("update bladder_data set bladder_capacity =#{bladder_capacity}, bladder_detrusor_pressure = #{bladder_detrusor_pressure},bladder_compliance = #{bladder_compliance} where id = #{id};")
-    int updateBladderById(@Param("bladder_capacity") Integer id1,@Param("bladder_detrusor_pressure") Integer id2,@Param("bladder_compliance") Integer id3,@Param("id") Integer id);
+    @Update("update patient_data ,bladder_data set patient_data.bladder_id = #{id} where patient_data.id = (select patient_data_id  from bladder_data where bladder_data.id = #{id});")
+    int updateBladder(@Param("id") Integer id1,@Param("id") Integer id2);
 
     /**
      * 根据id查询

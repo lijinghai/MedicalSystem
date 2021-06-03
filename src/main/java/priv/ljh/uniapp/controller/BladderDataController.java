@@ -67,10 +67,10 @@ public class BladderDataController {
         ResultResponse res = null;
         bladderDataMapper.updateById(bladderData);
         Integer id1 = bladderData.getId();
-        Integer id2 = bladderData.getPatientDataId();
+//        Integer id2 = bladderData.getPatientDataId();
         log.info("bladderData.getId()=======>"+bladderData.getId());
-        log.info("bladderData.getPatientDataId()======>"+bladderData.getPatientDataId());
-        bladderDataMapper.updateBladder(id1,id2);
+//        log.info("bladderData.getPatientDataId()======>"+bladderData.getPatientDataId());
+        bladderDataMapper.updateBladder(id1,id1);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, bladderData);
         return res;
     }
