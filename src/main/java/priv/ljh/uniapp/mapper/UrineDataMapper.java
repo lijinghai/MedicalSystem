@@ -35,7 +35,7 @@ public interface UrineDataMapper extends BaseMapper<UrineData> {
      * @param id2
      * @return
      */
-    @Update("update patient_data ,urine_data set patient_data.urine_id = #{id} where patient_data.id = (select patient_data_id  from urine_id where urine_id.id = #{id});")
+    @Update("update patient_data ,urine_data set patient_data.urine_id = #{id} where patient_data.id = (select patient_data_id  from urine_data where urine_data.id = #{id});")
     int updateUrine(@Param("id") Integer id1, @Param("id") Integer id2);
 
     /**
