@@ -43,6 +43,6 @@ public interface UrineDataMapper extends BaseMapper<UrineData> {
      * @param id
      * @return
      */
-    @Select("select * where id = #{id}")
+    @Select("select id, patient_data_id, leu, nit, pro, glu_u, ket, uro, bil, ph_u, sg, blu, vc, col, tmd, tsxb, u_wbc_c, klgx_f, u_tm_ca, u_rbc, lygx, wbc_j1, wbc_j2, note from urine_data where id = #{id}")
     List<Map> infoUrine(@Param("id") Integer id);
 }
