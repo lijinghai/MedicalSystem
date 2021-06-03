@@ -1,0 +1,100 @@
+package priv.ljh.uniapp.controller;
+
+
+import cn.hutool.core.util.RandomUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+
+import priv.ljh.uniapp.entity.UrineData;
+import priv.ljh.uniapp.mapper.UrineDataMapper;
+import priv.ljh.uniapp.service.UrineDataService;
+import priv.ljh.utils.Constants;
+import priv.ljh.utils.MyPage;
+import priv.ljh.utils.ResultResponse;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>
+ * 尿常规数据 前端控制器
+ * </p>
+ *
+ * @author lijinghai
+ * @since 2021-06-03
+ */
+@Api(tags = {"膀胱动力学资料信息控制类"})
+@Slf4j
+@RestController
+@RequestMapping("/urineData")
+public class UrineDataController {
+
+    @Autowired
+    private UrineDataMapper urineDataMapper;
+
+    @Autowired
+    private UrineDataService urineDataService;
+
+    @ApiOperation("增加一条信息")
+    @PostMapping
+    public ResultResponse create(@RequestBody UrineData urineData){
+        ResultResponse res = null;
+        int id = RandomUtil.randomInt(10000);;
+        urineDataMapper.insertUrine();
+        urineData.getId();
+        log.info("id========>"+urineData.getId());
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, urineData);
+        return res;
+    }
+
+
+    @ApiOperation("根据id删除一条信息")
+    @PostMapping("/delete")
+    public ResultResponse deleteUrineData (@RequestParam("id") Integer id){
+        ResultResponse res = null;
+        int result = urineDataMapper.deleteById(id);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, id);
+        return res;
+    }
+
+    @ApiOperation("修改一条信息")
+    @PutMapping
+    public ResultResponse updateUrineData(@RequestBody UrineData urineData){
+        ResultResponse res = null;
+        urineDataMapper.updateById(urineData);
+        Integer id1 = urineData.getId();
+        log.info("urineData.getId()=======>"+urineData.getId());
+        urineDataMapper.updateUrine(id1,id1);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, urineData);
+        return res;
+    }
+
+
+    @ApiOperation("查询所有信息")
+    @GetMapping
+    public ResultResponse queryUrineData(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        List<UrineData> urineData = urineDataMapper.selectList(null);
+        log.info("urineData====>"+urineData);
+        MyPage page = this.urineDataService.searchUrineData(pageNo, limit, idSort,urineData);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, page);
+        return res;
+    }
+
+    @ApiOperation("根据id查询信息")
+    @GetMapping("/id")
+    public ResultResponse queryUrineDataById(@RequestParam("id") Integer id,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        List<Map> info = urineDataMapper.infoUrine(id);
+        log.info("info====>"+info);
+        MyPage page = this.urineDataService.searchUrineDataById(pageNo, limit, idSort,info);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
+        return res;
+    }
+
+}
+
