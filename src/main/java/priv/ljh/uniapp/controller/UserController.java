@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import priv.ljh.uniapp.entity.User;
+import priv.ljh.uniapp.mapper.EventsMapper;
 import priv.ljh.uniapp.mapper.PatientDataMapper;
 import priv.ljh.uniapp.mapper.UserMapper;
 import priv.ljh.uniapp.service.UserService;
@@ -46,6 +47,9 @@ public class UserController {
 
     @Autowired
     private PatientDataMapper patientDataMapper;
+
+    @Autowired
+    private EventsMapper eventsMapper;
 
     @ApiOperation("用户登录,用户登录时的第一道关卡")
     @PostMapping("/login")
@@ -105,6 +109,8 @@ public class UserController {
         log.info("id===========>"+user.getId());
         // 添加到病患资料表
         patientDataMapper.InsertPatient(user.getId());
+        // 添加到事件表
+        eventsMapper.insertEvents(user.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, user);
         return res;
     }

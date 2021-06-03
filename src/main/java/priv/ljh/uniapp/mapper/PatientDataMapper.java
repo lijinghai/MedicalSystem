@@ -25,6 +25,4 @@ public interface PatientDataMapper extends BaseMapper<PatientData> {
     @Insert("insert into patient_data (user_id) values (#{userId}); ")
     int InsertPatient(@Param("userId")Integer userId);
 
-    @Update("")
-    int updatePatient(PatientData patientData);
 }
