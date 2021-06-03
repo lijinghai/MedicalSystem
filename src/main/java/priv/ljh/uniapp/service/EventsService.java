@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import priv.ljh.utils.MyPage;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,6 +24,16 @@ public interface EventsService extends IService<Events> {
      * @param events
      * @return
      */
-    public MyPage searchPcCarousel(int pageNo, int limit, String idSorted, List<Events> events);
+    public MyPage searchEvents(int pageNo, int limit, String idSorted, List<Events> events);
 
+    /**
+     * 根据id查询
+     * @param pageNo
+     * @param limit
+     * @param idSorted
+     * @param info
+     * @return
+     */
+    public MyPage searchEventsById(int pageNo, int limit, String idSorted, List<Map> info);
 }
+

@@ -78,7 +78,18 @@ public class EventsController {
         ResultResponse res = null;
         List<Events> events = eventsMapper.selectList(null);
         log.info("events====>"+events);
-        MyPage page = this.eventsService.searchPcCarousel(pageNo, limit, idSort,events);
+        MyPage page = this.eventsService.searchEvents(pageNo, limit, idSort,events);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
+        return res;
+    }
+
+    @ApiOperation("根据id查询信息")
+    @GetMapping("/id")
+    public ResultResponse queryBladderDataById(@RequestParam("id") Integer id,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        List<Map> info = eventsMapper.infoEvents(id);
+        log.info("info====>"+info);
+        MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
         return res;
     }
