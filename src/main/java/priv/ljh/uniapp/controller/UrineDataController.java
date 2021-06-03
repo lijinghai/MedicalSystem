@@ -27,7 +27,7 @@ import java.util.Map;
  * @author lijinghai
  * @since 2021-06-03
  */
-@Api(tags = {"膀胱动力学资料信息控制类"})
+@Api(tags = {"尿常规数据信息控制类"})
 @Slf4j
 @RestController
 @RequestMapping("/urineData")
