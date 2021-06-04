@@ -38,7 +38,7 @@ public class Events implements Serializable {
     private Integer userId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @ApiModelProperty(value = "默认当前时间")
     private Date eventTime;
 
