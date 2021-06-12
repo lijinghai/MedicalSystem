@@ -39,4 +39,27 @@ public interface EventsMapper extends BaseMapper<Events> {
      */
     @Select("select id, user_id, event_time, event_type, water_code, total_capacity, urgent_level, is_incontinence, incontinence_type, is_pain, is_leak, is_difficult, note from events where id = #{id}")
     List<Map> infoEvents(@Param("id") Integer id);
+
+
+    /**
+     * 查询第一条数据
+     * @return
+     */
+    @Select("select *  from events where  user_id=(select id from user limit 1) and id=(select min(id) from events  where user_id = (select user_id from events LIMIT 1));")
+    List<Map> infoFirst();
+
+    /**
+     * 查询第二条数据
+     * @return
+     */
+    @Select("select * from events where user_id = (select user_id from events LIMIT 1) and id>(select min(id) from events  where user_id = (select user_id from events LIMIT 1)) and id<(select max(id) from events  where user_id = (select user_id from events LIMIT 1));")
+    List<Map> infoSecond();
+
+    /**
+     * 第三条数据
+     * @return
+     */
+    @Select("select *  from events where  user_id=(select id from user limit 1) and id=(select max(id) from events  where user_id = (select user_id from events LIMIT 1));")
+    List<Map> infoThird();
+
 }

@@ -93,5 +93,38 @@ public class EventsController {
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
         return res;
     }
+
+    @ApiOperation("查询第一条信息")
+    @GetMapping("/first")
+    public ResultResponse queryBladderDataByFirst(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        List<Map> info = eventsMapper.infoFirst();
+        log.info("info====>"+info);
+        MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
+        return res;
+    }
+
+    @ApiOperation("查询第二条信息")
+    @GetMapping("/Second")
+    public ResultResponse queryBladderDataBySecond(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        List<Map> info = eventsMapper.infoSecond();
+        log.info("info====>"+info);
+        MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
+        return res;
+    }
+
+    @ApiOperation("查询第三条信息")
+    @GetMapping("/Third")
+    public ResultResponse queryBladderDataByThird(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        List<Map> info = eventsMapper.infoThird();
+        log.info("info====>"+info);
+        MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
+        return res;
+    }
 }
 
