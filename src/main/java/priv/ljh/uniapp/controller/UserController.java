@@ -3,15 +3,12 @@ package priv.ljh.uniapp.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.springframework.ui.Model;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import priv.ljh.uniapp.entity.User;
 import priv.ljh.uniapp.mapper.EventsMapper;
 import priv.ljh.uniapp.mapper.PatientDataMapper;
@@ -24,7 +21,6 @@ import priv.ljh.utils.ResultResponse;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +54,7 @@ public class UserController {
     @ApiOperation("用户登录,用户登录时的第一道关卡")
     @PostMapping("/login")
     public ResultResponse login(@RequestBody User user,HttpServletRequest request){
-        log.info("用户名:"+user.getAccount());
+        log.info("用户名:"+user.getMobile());
         log.info("密码:"+user.getPassword());
 
 
@@ -67,14 +63,14 @@ public class UserController {
         try {
             User userDB = userService.login(user);
             Map<String,String> playload = new HashMap<>();
-            playload.put("account",userDB.getAccount());
+            playload.put("mobile",userDB.getMobile());
 
             //生成JWT令牌机制
             String token = PCJwtUtils.getToken(playload);
 
             map.put("token",token);
             map.put("id",userDB.getId());
-            map.put("account",userDB.getAccount());
+            map.put("mobile",userDB.getMobile());
             map.put("state",1);
 
             //设置ServletContext
@@ -107,7 +103,7 @@ public class UserController {
         String token = request.getHeader("Authorization");
         DecodedJWT verify = PCJwtUtils.verify(token);
         //验证成功则获取用户名
-        map.put("account",verify.getClaim("account").asString());
+        map.put("mobile",verify.getClaim("mobile").asString());
         map.put("state",1);
         log.info("登录成功");
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, map);
