@@ -3,6 +3,7 @@ package priv.ljh.uniapp.mapper;
 import io.swagger.annotations.ApiModel;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import priv.ljh.uniapp.entity.RenalData;
 import priv.ljh.uniapp.entity.UreteralData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -27,8 +28,8 @@ public interface UreteralDataMapper extends BaseMapper<UreteralData> {
      * @param
      * @return
      */
-    @Insert(" insert into ureteral_data (patient_data_id) select id  from patient_data")
-    int insertUreteral();
+    @Insert(" insert into ureteral_data (patient_data_id) select id  from patient_data where user_id = #{id}")
+    int insertUreteral(@Param("id") Integer id);
 
     /**
      * 自定义更新语句
@@ -46,4 +47,12 @@ public interface UreteralDataMapper extends BaseMapper<UreteralData> {
      */
     @Select("select id, patient_data_id, param1, param2, param3, param4, param5, note from ureteral_data where id = #{id}")
     List<Map> infoUreteral(@Param("id") Integer id);
+
+    /**
+     * 查询所有
+     * @param id
+     * @return
+     */
+    @Select("select id, patient_data_id, param1, param2, param3, param4, param5, note from ureteral_data where patient_data_id = (select id from patient_data where user_id = #{id})")
+    List<UreteralData> selectAll(@Param("id") Integer id);
 }

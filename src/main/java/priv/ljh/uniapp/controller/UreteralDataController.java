@@ -18,6 +18,8 @@ import priv.ljh.utils.Constants;
 import priv.ljh.utils.MyPage;
 import priv.ljh.utils.ResultResponse;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -42,10 +44,15 @@ public class UreteralDataController {
 
     @ApiOperation("增加一条信息")
     @PostMapping
-    public ResultResponse create(@RequestBody UreteralData ureteralData){
+    public ResultResponse create(HttpServletRequest request,@RequestBody UreteralData ureteralData){
         ResultResponse res = null;
-        int id = RandomUtil.randomInt(10000);;
-        ureteralDataMapper.insertUreteral();
+        int id = RandomUtil.randomInt(10000);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        ureteralDataMapper.insertUreteral(id1);
         ureteralData.getId();
         log.info("id========>"+ureteralData.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, ureteralData);
@@ -77,9 +84,14 @@ public class UreteralDataController {
 
     @ApiOperation("查询所有信息")
     @GetMapping
-    public ResultResponse queryUreteralData(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    public ResultResponse queryUreteralData(HttpServletRequest request,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
         ResultResponse res = null;
-        List<UreteralData> ureteralData = ureteralDataMapper.selectList(null);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        List<UreteralData> ureteralData = ureteralDataMapper.selectAll(id1);
         log.info("ureteralData====>"+ureteralData);
         MyPage page = this.ureteralDataService.searchUreteralData(pageNo, limit, idSort,ureteralData);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, page);
