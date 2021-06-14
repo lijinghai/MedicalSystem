@@ -62,13 +62,13 @@ public class UserController {
         try {
             User userDB = userService.login(user);
             Map<String,String> playload = new HashMap<>();
-            playload.put("acconut",userDB.getAccount());
+            playload.put("account",userDB.getAccount());
 
             //生成JWT令牌机制
             String token = PCJwtUtils.getToken(playload);
 
             map.put("token",token);
-            map.put("acconut",user.getAccount());
+            map.put("account",user.getAccount());
             map.put("state",1);
             res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, map);
         } catch (Exception e) {
