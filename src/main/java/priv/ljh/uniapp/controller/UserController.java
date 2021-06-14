@@ -3,13 +3,15 @@ package priv.ljh.uniapp.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.mysql.cj.xdevapi.InsertParams;
+import org.springframework.ui.Model;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import priv.ljh.uniapp.entity.User;
 import priv.ljh.uniapp.mapper.EventsMapper;
 import priv.ljh.uniapp.mapper.PatientDataMapper;
@@ -20,7 +22,9 @@ import priv.ljh.utils.MyPage;
 import priv.ljh.utils.PCJwtUtils;
 import priv.ljh.utils.ResultResponse;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
@@ -53,9 +57,10 @@ public class UserController {
 
     @ApiOperation("用户登录,用户登录时的第一道关卡")
     @PostMapping("/login")
-    public ResultResponse login(@RequestBody User user){
+    public ResultResponse login(@RequestBody User user,HttpServletRequest request){
         log.info("用户名:"+user.getAccount());
         log.info("密码:"+user.getPassword());
+
 
         ResultResponse res = null;
         Map<String,Object> map = new HashMap<>();
@@ -68,13 +73,28 @@ public class UserController {
             String token = PCJwtUtils.getToken(playload);
 
             map.put("token",token);
-            map.put("account",user.getAccount());
+            map.put("id",userDB.getId());
+            map.put("account",userDB.getAccount());
             map.put("state",1);
+
+            //设置ServletContext
+
+            ServletContext context= request.getServletContext();
+
+            context.setAttribute("id",userDB.getId());
+
+            // 获取
+            context.getAttribute("id");
+
+            log.info("user id======>"+ context.getAttribute("id"));
+
             res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, map);
+
         } catch (Exception e) {
             map.put("message",e.getMessage());
             res = new ResultResponse(Constants.STATUS_FALL, Constants.MESSAGE_FALL, map);
         }
+
         return res;
     }
 

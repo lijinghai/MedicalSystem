@@ -9,13 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import priv.ljh.uniapp.entity.UrineData;
+import priv.ljh.uniapp.entity.User;
 import priv.ljh.uniapp.mapper.UrineDataMapper;
 import priv.ljh.uniapp.service.UrineDataService;
 import priv.ljh.utils.Constants;
 import priv.ljh.utils.MyPage;
 import priv.ljh.utils.ResultResponse;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -87,13 +93,29 @@ public class UrineDataController {
 
     @ApiOperation("根据id查询信息")
     @GetMapping("/id")
-    public ResultResponse queryUrineDataById(@RequestParam("id") Integer id,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    public ResultResponse queryUrineDataById(HttpServletRequest request,@RequestParam("id") Integer id,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
         ResultResponse res = null;
         List<Map> info = urineDataMapper.infoUrine(id);
         log.info("info====>"+info);
         MyPage page = this.urineDataService.searchUrineDataById(pageNo, limit, idSort,info);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
+
+
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+
+        log.info("user id======>"+ id1);
+
+
         return res;
+
+
+
+
+
     }
 
 }
