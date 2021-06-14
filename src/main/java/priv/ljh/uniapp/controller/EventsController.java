@@ -44,9 +44,9 @@ public class EventsController {
     @Autowired
     private EventsService eventsService;
 
-    @ApiOperation("增加一条信息")
-    @PostMapping
-    public ResultResponse create(HttpServletRequest request,@RequestBody Events events){
+    @ApiOperation("增加一条餐饮事件信息")
+    @PostMapping("/first")
+    public ResultResponse createFirst(HttpServletRequest request,@RequestBody Events events){
         ResultResponse res = null;
         int id = RandomUtil.randomInt(10000);
         //获取user_id
@@ -54,7 +54,37 @@ public class EventsController {
 
         // 获取
         int id1 = (int) context.getAttribute("id");
-        eventsMapper.insertEvents(id1);
+        eventsMapper.insertFood(id1);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, events);
+        return res;
+    }
+
+    @ApiOperation("增加一条导尿事件信息")
+    @PostMapping("/second")
+    public ResultResponse createSecond(HttpServletRequest request,@RequestBody Events events){
+        ResultResponse res = null;
+        int id = RandomUtil.randomInt(10000);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        eventsMapper.insertSecond(id1);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, events);
+        return res;
+    }
+
+    @ApiOperation("增加一条特殊事件信息")
+    @PostMapping("/third")
+    public ResultResponse createThird(HttpServletRequest request,@RequestBody Events events){
+        ResultResponse res = null;
+        int id = RandomUtil.randomInt(10000);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        eventsMapper.insertThird(id1);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, events);
         return res;
     }
@@ -100,13 +130,12 @@ public class EventsController {
         return res;
     }
 
-    @ApiOperation("查询第一条信息")
+    @ApiOperation("查询餐饮事件信息")
     @GetMapping("/first")
     public ResultResponse queryBladderDataByFirst(HttpServletRequest request,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
         ResultResponse res = null;
         //获取user_id
         ServletContext context= request.getServletContext();
-
         // 获取
         int id1 = (int) context.getAttribute("id");
         List<Map> info = eventsMapper.infoFirst(id1);
@@ -116,22 +145,32 @@ public class EventsController {
         return res;
     }
 
-    @ApiOperation("查询第二条信息")
-    @GetMapping("/Second")
-    public ResultResponse queryBladderDataBySecond(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    @ApiOperation("查询导尿事件信息")
+    @GetMapping("/second")
+    public ResultResponse queryBladderDataBySecond(HttpServletRequest request,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
         ResultResponse res = null;
-        List<Map> info = eventsMapper.infoSecond();
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        List<Map> info = eventsMapper.infoSecond(id1);
         log.info("info====>"+info);
         MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
         return res;
     }
 
-    @ApiOperation("查询第三条信息")
-    @GetMapping("/Third")
-    public ResultResponse queryBladderDataByThird(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    @ApiOperation("查询特殊事件")
+    @GetMapping("/third")
+    public ResultResponse queryBladderDataByThird(HttpServletRequest request,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
         ResultResponse res = null;
-        List<Map> info = eventsMapper.infoThird();
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        List<Map> info = eventsMapper.infoThird(id1);
         log.info("info====>"+info);
         MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);

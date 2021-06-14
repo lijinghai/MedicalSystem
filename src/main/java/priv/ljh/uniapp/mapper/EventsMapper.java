@@ -24,13 +24,6 @@ import java.util.Map;
 @Repository
 @ApiModel("事件表实体接口类")
 public interface EventsMapper extends BaseMapper<Events> {
-    /**
-     * 自定义添加
-     * @param userId
-     * @return
-     */
-    @Insert("insert into events (user_id) values (#{userId});")
-    int insertEvents(@Param("userId")Integer userId);
 
     /**
      * 根据id查询
@@ -40,26 +33,49 @@ public interface EventsMapper extends BaseMapper<Events> {
     @Select("select id, user_id, event_time, event_type, water_code, total_capacity, urgent_level, is_incontinence, incontinence_type, is_pain, is_leak, is_difficult, note from events where id = #{id}")
     List<Map> infoEvents(@Param("id") Integer id);
 
-
     /**
-     * 查询第一条数据
+     * 自定义添加餐饮事件
+     * @param userId
      * @return
      */
-    @Select("select *  from events where  user_id= #{id} and is_pain = 0")
+    @Insert("insert into events (user_id,note) values (#{userId},'餐饮事件');")
+    int insertFood(@Param("userId")Integer userId);
+
+    /**
+     * 查询餐饮事件
+     * @return
+     */
+    @Select("select *  from events where  user_id= #{id} and note ='餐饮事件'")
     List<Map> infoFirst(@Param("id") Integer id);
 
     /**
-     * 查询第二条数据
+     * 自定义添加导尿事件
+     * @param userId
      * @return
      */
-    @Select("select * from events where user_id = (select user_id from events LIMIT 1) and id>(select min(id) from events  where user_id = (select user_id from events LIMIT 1)) and id<(select max(id) from events  where user_id = (select user_id from events LIMIT 1));")
-    List<Map> infoSecond();
+    @Insert("insert into events (user_id,note) values (#{userId},'导尿事件');")
+    int insertSecond(@Param("userId")Integer userId);
 
     /**
-     * 第三条数据
+     * 查询导尿事件
      * @return
      */
-    @Select("select *  from events where  user_id=(select id from user limit 1) and id=(select max(id) from events  where user_id = (select user_id from events LIMIT 1));")
-    List<Map> infoThird();
+    @Select("select * from events where user_id = #{id} and note ='导尿事件';")
+    List<Map> infoSecond(@Param("id") Integer id);
+
+    /**
+     * 自定义添加导尿事件
+     * @param userId
+     * @return
+     */
+    @Insert("insert into events (user_id,note) values (#{userId},'特殊事件');")
+    int insertThird(@Param("userId")Integer userId);
+
+    /**
+     * 查询特殊事件
+     * @return
+     */
+    @Select("select *  from events where  user_id = #{id} and note ='特殊事件';")
+    List<Map> infoThird(@Param("id") Integer id);
 
 }
