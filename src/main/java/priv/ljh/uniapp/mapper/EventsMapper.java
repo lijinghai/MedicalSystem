@@ -45,8 +45,8 @@ public interface EventsMapper extends BaseMapper<Events> {
      * 查询第一条数据
      * @return
      */
-    @Select("select *  from events where  user_id=(select id from user limit 1) and id=(select min(id) from events  where user_id = (select user_id from events LIMIT 1));")
-    List<Map> infoFirst();
+    @Select("select *  from events where  user_id= #{id} and is_pain = 0")
+    List<Map> infoFirst(@Param("id") Integer id);
 
     /**
      * 查询第二条数据

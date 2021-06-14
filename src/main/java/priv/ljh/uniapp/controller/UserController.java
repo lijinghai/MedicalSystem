@@ -126,7 +126,7 @@ public class UserController {
         // 添加到病患资料表
         patientDataMapper.InsertPatient(user.getId());
         // 添加到事件表
-        eventsMapper.insertEvents(user.getId());
+//        eventsMapper.insertEvents(user.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, user);
         return res;
     }

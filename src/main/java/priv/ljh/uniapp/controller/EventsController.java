@@ -16,6 +16,7 @@ import priv.ljh.utils.Constants;
 import priv.ljh.utils.MyPage;
 import priv.ljh.utils.ResultResponse;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -45,10 +46,15 @@ public class EventsController {
 
     @ApiOperation("增加一条信息")
     @PostMapping
-    public ResultResponse create(@RequestBody Events events){
+    public ResultResponse create(HttpServletRequest request,@RequestBody Events events){
         ResultResponse res = null;
         int id = RandomUtil.randomInt(10000);
-        eventsMapper.insert(events);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        eventsMapper.insertEvents(id1);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, events);
         return res;
     }
@@ -96,9 +102,14 @@ public class EventsController {
 
     @ApiOperation("查询第一条信息")
     @GetMapping("/first")
-    public ResultResponse queryBladderDataByFirst(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    public ResultResponse queryBladderDataByFirst(HttpServletRequest request,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
         ResultResponse res = null;
-        List<Map> info = eventsMapper.infoFirst();
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        List<Map> info = eventsMapper.infoFirst(id1);
         log.info("info====>"+info);
         MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
