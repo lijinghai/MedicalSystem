@@ -18,6 +18,8 @@ import priv.ljh.utils.Constants;
 import priv.ljh.utils.MyPage;
 import priv.ljh.utils.ResultResponse;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -43,10 +45,15 @@ public class RenalDataController {
 
     @ApiOperation("增加一条信息")
     @PostMapping
-    public ResultResponse create(@RequestBody RenalData renalData){
+    public ResultResponse create(@RequestBody RenalData renalData, HttpServletRequest request){
         ResultResponse res = null;
-        int id = RandomUtil.randomInt(10000);;
-        renalDataMapper.insertRenal();
+        int id = RandomUtil.randomInt(10000);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        renalDataMapper.insertRenal(id1);
         renalData.getId();
         log.info("id========>"+renalData.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, renalData);
@@ -78,9 +85,14 @@ public class RenalDataController {
 
     @ApiOperation("查询所有信息")
     @GetMapping
-    public ResultResponse queryRenalData(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    public ResultResponse queryRenalData(HttpServletRequest request,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
         ResultResponse res = null;
-        List<RenalData> renalData = renalDataMapper.selectList(null);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        List<RenalData> renalData = renalDataMapper.selectAll(id1);
         log.info("renalData====>"+renalData);
         MyPage page = this.renalDataService.searchRenalData(pageNo, limit, idSort,renalData);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, page);

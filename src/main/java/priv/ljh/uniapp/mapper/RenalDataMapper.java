@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import priv.ljh.uniapp.entity.RenalData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import priv.ljh.uniapp.entity.UrineData;
 
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,8 @@ public interface RenalDataMapper extends BaseMapper<RenalData> {
      * @param
      * @return
      */
-    @Insert(" insert into renal_data (patient_data_id) select id  from patient_data")
-    int insertRenal();
+    @Insert(" insert into renal_data (patient_data_id) select id  from patient_data where user_id = #{id}")
+    int insertRenal(@Param("id") Integer id);
 
     /**
      * 自定义更新语句
@@ -45,4 +46,13 @@ public interface RenalDataMapper extends BaseMapper<RenalData> {
      */
     @Select("select id, patient_data_id, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, note from renal_data where id = #{id}")
     List<Map> infoRenal(@Param("id") Integer id);
+
+
+    /**
+     * 查询所有
+     * @param id
+     * @return
+     */
+    @Select("select id, patient_data_id, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, note from renal_data where patient_data_id = (select id from patient_data where user_id = #{id})")
+    List<RenalData> selectAll(@Param("id") Integer id);
 }
