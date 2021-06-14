@@ -27,8 +27,8 @@ public interface BladderDataMapper extends BaseMapper<BladderData> {
      * @param
      * @return
      */
-    @Insert(" insert into bladder_data (patient_data_id) select id  from patient_data")
-    int insertBladder();
+    @Insert("insert into bladder_data (patient_data_id) select id  from patient_data where user_id = #{id}")
+    int insertBladder(@Param("id") Integer id);
 
     /**
      * 自定义更新语句
@@ -46,4 +46,12 @@ public interface BladderDataMapper extends BaseMapper<BladderData> {
      */
     @Select("select id,  patient_data_id, bladder_capacity, bladder_detrusor_pressure, bladder_compliance, note from bladder_data where id = #{id}")
     List<Map> infoBladder(@Param("id") Integer id);
+
+    /**
+     * 查询所有
+     * @param id
+     * @return
+     */
+    @Select("select id,  patient_data_id, bladder_capacity, bladder_detrusor_pressure, bladder_compliance, note from bladder_data where patient_data_id = (select id from patient_data where user_id = #{id})")
+    List<BladderData> selectAll(@Param("id") Integer id);
 }

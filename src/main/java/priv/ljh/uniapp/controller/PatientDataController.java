@@ -16,6 +16,8 @@ import priv.ljh.utils.Constants;
 import priv.ljh.utils.MyPage;
 import priv.ljh.utils.ResultResponse;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -37,12 +39,19 @@ public class PatientDataController {
     @Autowired
     private PatientDataService patientDataService;
 
+
     @ApiOperation("增加一条信息")
     @PostMapping
-    public ResultResponse create(@RequestBody PatientData patientData){
+    public ResultResponse create(@RequestBody PatientData patientData,HttpServletRequest request){
         ResultResponse res = null;
         int id = RandomUtil.randomInt(10000);
         patientDataMapper.insert(patientData);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        patientDataMapper.InsertPatient(id1);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, patientData);
         return res;
     }

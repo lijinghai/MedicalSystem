@@ -109,12 +109,7 @@ public class UrineDataController {
 
         log.info("user id======>"+ id1);
 
-
         return res;
-
-
-
-
 
     }
 

@@ -15,6 +15,8 @@ import priv.ljh.utils.Constants;
 import priv.ljh.utils.MyPage;
 import priv.ljh.utils.ResultResponse;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -40,11 +42,15 @@ public class BladderDataController {
 
     @ApiOperation("增加一条信息")
     @PostMapping
-    public ResultResponse create(@RequestBody BladderData bladderData){
+    public ResultResponse create(@RequestBody BladderData bladderData, HttpServletRequest request){
         ResultResponse res = null;
         int id = RandomUtil.randomInt(10000);
-//        bladderDataMapper.insert(bladderData);
-        bladderDataMapper.insertBladder();
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        bladderDataMapper.insertBladder(id1);
         bladderData.getId();
         log.info("id========>"+bladderData.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, bladderData);
@@ -78,9 +84,14 @@ public class BladderDataController {
 
     @ApiOperation("查询所有信息")
     @GetMapping
-    public ResultResponse queryBladderData(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    public ResultResponse queryBladderData(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort,HttpServletRequest request){
         ResultResponse res = null;
-        List<BladderData> bladderData = bladderDataMapper.selectList(null);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        List<BladderData> bladderData = bladderDataMapper.selectAll(id1);
         log.info("bladderData====>"+bladderData);
         MyPage page = this.bladderDataService.searchBladderData(pageNo, limit, idSort,bladderData);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, page);
