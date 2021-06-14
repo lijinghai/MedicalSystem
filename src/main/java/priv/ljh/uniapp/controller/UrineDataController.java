@@ -47,10 +47,15 @@ public class UrineDataController {
 
     @ApiOperation("增加一条信息")
     @PostMapping
-    public ResultResponse create(@RequestBody UrineData urineData){
+    public ResultResponse create(@RequestBody UrineData urineData,HttpServletRequest request){
         ResultResponse res = null;
-        int id = RandomUtil.randomInt(10000);;
-        urineDataMapper.insertUrine();
+        int id = RandomUtil.randomInt(10000);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        urineDataMapper.insertUrine(id1);
         urineData.getId();
         log.info("id========>"+urineData.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, urineData);
@@ -82,9 +87,14 @@ public class UrineDataController {
 
     @ApiOperation("查询所有信息")
     @GetMapping
-    public ResultResponse queryUrineData(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    public ResultResponse queryUrineData(@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort,HttpServletRequest request){
         ResultResponse res = null;
-        List<UrineData> urineData = urineDataMapper.selectList(null);
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        List<UrineData> urineData = urineDataMapper.selectAll(id1);
         log.info("urineData====>"+urineData);
         MyPage page = this.urineDataService.searchUrineData(pageNo, limit, idSort,urineData);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, page);
