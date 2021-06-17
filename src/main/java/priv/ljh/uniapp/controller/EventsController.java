@@ -180,7 +180,7 @@ public class EventsController {
 
     @ApiOperation("按照时间查询")
     @GetMapping("/time")
-    public ResultResponse queryBladderDataByTime(@Param("time1") String time1, @Param("time2") String time2,HttpServletRequest request, @RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+    public ResultResponse queryBladderDataByTime(@RequestParam("time1") String time1, @RequestParam("time2") String time2,HttpServletRequest request, @RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
         ResultResponse res = null;
         //获取user_id
         ServletContext context= request.getServletContext();
