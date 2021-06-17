@@ -12,11 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * 处理前后端跨域问题
  * @author lijinghai
-<<<<<<< HEAD
- * @Date 2021-1-26
-=======
- * @Date 2021-1-27
->>>>>>> dev
+ * @Date 2021-6-18
  */
 @Configuration
 @Slf4j
@@ -28,6 +24,8 @@ public class MyWebCrossOrgin {
     private String allowedOrigin1;
     @Value("${allowed2.origin2}")
     private String allowedOrigin2;
+    @Value("${allowed3.origin3}")
+    private String allowedOrigin3;
     @Bean
     public CorsFilter corsFilter() {
         log.info(this.allowedOrigin);
@@ -38,6 +36,7 @@ public class MyWebCrossOrgin {
         config.addAllowedOrigin(allowedOrigin);
         config.addAllowedOrigin(allowedOrigin1);
         config.addAllowedOrigin(allowedOrigin2);
+        config.addAllowedOrigin(allowedOrigin3);
         //2) 是否发送Cookie信息
         config.setAllowCredentials(true);
         //3) 允许的请求方式
