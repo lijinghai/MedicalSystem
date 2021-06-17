@@ -78,4 +78,11 @@ public interface EventsMapper extends BaseMapper<Events> {
     @Select("select *  from events where  user_id = #{id} and note ='特殊事件';")
     List<Map> infoThird(@Param("id") Integer id);
 
+    /**
+     * 按照时间查询数据
+     * @return
+     */
+    @Select("select * from events where event_time>#{time1} and event_time<#{time2} and user_id = #{id};")
+    List<Map> infoTime(@Param("time1") String time1,@Param("time2") String time2,@Param("id") Integer id);
+
 }

@@ -5,6 +5,7 @@ import cn.hutool.core.util.RandomUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -171,6 +172,22 @@ public class EventsController {
         // 获取
         int id1 = (int) context.getAttribute("id");
         List<Map> info = eventsMapper.infoThird(id1);
+        log.info("info====>"+info);
+        MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
+        return res;
+    }
+
+    @ApiOperation("按照时间查询")
+    @GetMapping("/time")
+    public ResultResponse queryBladderDataByTime(@Param("time1") String time1, @Param("time2") String time2,HttpServletRequest request, @RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        //获取user_id
+        ServletContext context= request.getServletContext();
+
+        // 获取
+        int id1 = (int) context.getAttribute("id");
+        List<Map> info = eventsMapper.infoTime(time1,time2,id1);
         log.info("info====>"+info);
         MyPage page = this.eventsService.searchEventsById(pageNo, limit, idSort,info);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
