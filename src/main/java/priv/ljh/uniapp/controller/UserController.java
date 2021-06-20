@@ -114,20 +114,25 @@ public class UserController {
 
     @ApiOperation("增加一条用户信息")
     @PostMapping("/add")
-    public ResultResponse create(@RequestBody User user) throws SQLException {
+    public ResultResponse create(@RequestBody User user,@RequestParam(value = "mobile", required = false) String mobile) throws SQLException {
         int ret = 0;
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         ResultResponse res = null;
         int id = RandomUtil.randomInt(10000);
-        userMapper.insert(user);
-        log.info("id===========>"+user.getId());
-        // 添加到病患资料表
-        patientDataMapper.InsertPatient(user.getId());
-        // 添加到事件表
-//        eventsMapper.insertEvents(user.getId());
-        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, user);
+        int count = userMapper.selectCount(user.getMobile());
+        log.info("count===>"+count);
+        if (count == 0 ){
+            userMapper.insert(user);
+            log.info("id===========>"+user.getId());
+            // 添加到病患资料表
+            patientDataMapper.InsertPatient(user.getId());
+            res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, user);
+        } else {
+            String message = "用户名已经存在，请重新输入";
+            res = new ResultResponse(Constants.STATUS_FALL, Constants.MESSAGE_FALL+message,null);
+        }
         return res;
     }
 
@@ -161,5 +166,6 @@ public class UserController {
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, page);
         return res;
     }
+
 }
 
