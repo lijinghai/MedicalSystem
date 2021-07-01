@@ -54,7 +54,7 @@ public class UserController {
     @ApiOperation("用户登录,用户登录时的第一道关卡")
     @PostMapping("/login")
     public ResultResponse login(@RequestBody User user,HttpServletRequest request){
-        log.info("用户名:"+user.getMobile());
+        log.info("用户名:"+user.getAccount());
         log.info("密码:"+user.getPassword());
 
 
@@ -63,14 +63,14 @@ public class UserController {
         try {
             User userDB = userService.login(user);
             Map<String,String> playload = new HashMap<>();
-            playload.put("mobile",userDB.getMobile());
+            playload.put("account",userDB.getAccount());
 
             //生成JWT令牌机制
             String token = PCJwtUtils.getToken(playload);
 
             map.put("token",token);
             map.put("id",userDB.getId());
-            map.put("mobile",userDB.getMobile());
+            map.put("account",userDB.getAccount());
             map.put("state",1);
 
             //设置ServletContext

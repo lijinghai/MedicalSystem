@@ -27,7 +27,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param user
      * @return
      */
-    @Select("select * from user where mobile = #{mobile} and password= #{password}")
+    @Select("select * from user where account = #{account} and password= #{password}")
     User login(User user);
 
     /**
