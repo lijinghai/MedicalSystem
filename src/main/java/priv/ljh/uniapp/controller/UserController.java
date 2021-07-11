@@ -114,25 +114,25 @@ public class UserController {
 
     @ApiOperation("增加一条用户信息")
     @PostMapping("/add")
-    public ResultResponse create(@RequestBody User user,@RequestParam(value = "mobile", required = false) String mobile) throws SQLException {
+    public ResultResponse create(@RequestBody User user,@RequestParam(value = "mobile", required = false) String account) throws SQLException {
         int ret = 0;
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         ResultResponse res = null;
         int id = RandomUtil.randomInt(10000);
-//        int count = userMapper.selectCount(mobile);
-//        log.info("count===>"+count);
-//        if (count == 0 ){
+        int count = userMapper.selectCount(account);
+        log.info("count===>"+count);
+        if (count == 0 ){
             userMapper.insert(user);
             log.info("id===========>"+user.getId());
             // 添加到病患资料表
             patientDataMapper.InsertPatient(user.getId());
             res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, user);
-//        } else {
-//            String message = "用户名已经存在，请重新输入";
-//            res = new ResultResponse(Constants.STATUS_FALL, Constants.MESSAGE_FALL+message,null);
-//        }
+        } else {
+            String message = "用户名已经存在，请重新输入";
+            res = new ResultResponse(Constants.STATUS_FALL, Constants.MESSAGE_FALL+message,null);
+        }
         return res;
     }
 

@@ -32,9 +32,9 @@ public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 判断用户名是否重复
-     * @param mobile
+     * @param account
      * @return
      */
-//    @Select("select count(*) from user where mobile = #{mobile};")
-    int selectCount(@Param("mobile") String mobile);
+    @Select("select count(*) from user where account = #{account};")
+    int selectCount(@Param("account") String account);
 }
