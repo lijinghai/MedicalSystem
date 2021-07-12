@@ -138,6 +138,7 @@ public class UserController {
             res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, user);
         } else {
             String message = "用户名已经存在，请重新输入";
+            log.info("message===========>"+message);
             res = new ResultResponse(Constants.STATUS_FALL, Constants.MESSAGE_FALL+message,null);
         }
         return res;
