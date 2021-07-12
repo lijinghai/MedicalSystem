@@ -1,6 +1,7 @@
 package priv.ljh.uniapp.mapper;
 
 import io.swagger.annotations.ApiModel;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -35,6 +36,18 @@ public interface UserMapper extends BaseMapper<User> {
      * @param account
      * @return
      */
-    @Select("select count(*) from user where account = #{account};")
-    int selectCount(@Param("account") String account);
+//    @Select("select count(*) from user where account = #{account};")
+//    int selectCount(@Param("account") String account);
+
+    @Insert("insert into user (account,mobile,password) select #{account},#{account},#{password} from user where not exists(select id from user where account = #{account}) limit 0,1")
+    int insertUser(@Param("account") String account,@Param("password") String password);
+
+
+    /**
+     * 查询添加数据的id
+     * @param account
+     * @return
+     */
+    @Select("select id from user where account = #{account}")
+    int selectId(@Param("account") String account);
 }
