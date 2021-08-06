@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MedicalSystem:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>MedicalSystem</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="warmsearch-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="MedicalSystem:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.4.2" />
+          <element id="library" level="module" name="Maven: otdrinterface:otdrinterface:1.0" module-name="MedicalSystem" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
