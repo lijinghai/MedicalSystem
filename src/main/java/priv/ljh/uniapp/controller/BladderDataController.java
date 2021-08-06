@@ -57,6 +57,18 @@ public class BladderDataController {
         return res;
     }
 
+    @ApiOperation("根据id增加一条信息")
+    @PostMapping("/id")
+    public ResultResponse create(@RequestBody BladderData bladderData, HttpServletRequest request,@RequestParam("id") Integer id){
+        ResultResponse res = null;
+
+        bladderDataMapper.insertBladder(id);
+        bladderData.getId();
+        log.info("id========>"+bladderData.getId());
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, bladderData);
+        return res;
+    }
+
 
     @ApiOperation("根据id删除一条信息")
     @PostMapping("/delete")
