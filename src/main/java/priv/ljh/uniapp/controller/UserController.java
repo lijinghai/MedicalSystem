@@ -5,6 +5,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,13 @@ public class UserController {
     @Autowired
     private EventsMapper eventsMapper;
 
+
+//    private String avatar;
+//
+//    public void setAvatar(String avatar) {
+//        this.avatar = avatar;
+//    }
+
     @ApiOperation("用户登录,用户登录时的第一道关卡")
     @PostMapping("/login")
     public ResultResponse login(@RequestBody User user,HttpServletRequest request){
@@ -62,16 +70,20 @@ public class UserController {
         Map<String,Object> map = new HashMap<>();
         try {
             User userDB = userService.login(user);
-            Map<String,String> playload = new HashMap<>();
+            if(userDB != null){
+                Map<String,String> playload = new HashMap<>();
             playload.put("account",userDB.getAccount());
+            playload.put("name",userDB.getName());
+            playload.put("password",userDB.getPassword());
+            playload.put("mobile", userDB.getMobile());
+            playload.put("email",userDB.getEmail());
+            playload.put("sex",userDB.getSex());
 
             //生成JWT令牌机制
             String token = PCJwtUtils.getToken(playload);
 
             map.put("token",token);
-            map.put("id",userDB.getId());
-            map.put("account",userDB.getAccount());
-            map.put("state",1);
+
 
             //设置ServletContext
 
@@ -85,31 +97,111 @@ public class UserController {
             log.info("user id======>"+ context.getAttribute("id"));
 
             res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, map);
+            }else {
+                res = new ResultResponse(Constants.STATUS_FALL, "账号或密码错误", "");
+            }
 
         } catch (Exception e) {
             map.put("message",e.getMessage());
-            res = new ResultResponse(Constants.STATUS_FALL, Constants.MESSAGE_FALL, map);
+            res = new ResultResponse(Constants.STATUS_FALL, "账号或密码错误", "");
+
         }
 
         return res;
     }
 
-    @ApiOperation("验证用户是否登录，用户登录的第二道关卡")
-    @PostMapping("/validate")
-    public ResultResponse validate(HttpServletRequest request){
-        Map<String,Object> map = new HashMap<>();
-        ResultResponse res = null;
+
+
+    @ApiOperation("管理员登录第二道关卡")
+    @GetMapping("/info")
+    public ResultResponse infor(@RequestParam("token") String token, HttpServletRequest request) {
+        ResultResponse res = new ResultResponse();
         //验证Token的合法性
-        String token = request.getHeader("Authorization");
+        String tokenValue = request.getHeader("Authorization");
         DecodedJWT verify = PCJwtUtils.verify(token);
-        //验证成功则获取用户名
-        map.put("mobile",verify.getClaim("mobile").asString());
-        map.put("state",1);
-        log.info("登录成功");
-        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, map);
+        //封装用户信息
+        User info = new User();
+
+
+        if(verify != null) {
+
+            //如果ok,返回需要的用户信息
+            //从token中拿出id
+
+            //设置ServletContext获取user_id
+            ServletContext context= request.getServletContext();
+            int id = (int)context.getAttribute("id");
+
+            String user_id = verify.getClaim("id").asString();
+            info.setId(id);
+            log.info("从token中拿出id====>"+id);
+
+            //从token中拿出用户名name
+            String name = verify.getClaim("name").asString();
+            info.setName(name);
+            log.info("从token中拿出用户名name====>"+name);
+
+            //从token中拿出密码password
+            String password = verify.getClaim("password").asString();
+            info.setPassword(password);
+            log.info("从token中拿出用户名password====>"+password);
+
+            //从token中拿出账号
+            String account = verify.getClaim("account").asString();
+            info.setAccount(account);
+            log.info("从token中拿出角色account====>"+account);
+
+            //从token中拿出性别sex
+            String sex = verify.getClaim("sex").asString();
+            info.setSex(sex);
+            log.info("从token中拿出性别sex====>"+sex);
+
+            //从token中拿出手机号mobile
+            String mobile= verify.getClaim("mobile").asString();
+            info.setMobile(mobile);
+            log.info("从token中拿出手机号mobile====>"+mobile);
+
+            //从token中拿出邮箱emial
+            String email = verify.getClaim("email").asString();
+            info.setEmail(email);
+            log.info("从token中拿出邮箱email====>"+email);
+
+
+            info.setAvatar("https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/custom/tuxiang.jpg");
+//            info.setName("Dorian");
+//            info.setId(info.getId());
+//            info.setUsername(name);
+//            info.setIntroduction("测试用户");
+//            info.setName(name);
+//            List<String> roles = Arrays.asList("admin");
+//            info.setRoles(roles);
+//            res.setData(info);
+
+            res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, info);
+        }else {
+            //否则：500
+            res = new ResultResponse(Constants.STATUS_FALL, Constants.MESSAGE_FALL, info);
+        }
 
         return res;
     }
+
+//    @ApiOperation("验证用户是否登录，用户登录的第二道关卡")
+//    @PostMapping("/validate")
+//    public ResultResponse validate(HttpServletRequest request){
+//        Map<String,Object> map = new HashMap<>();
+//        ResultResponse res = null;
+//        //验证Token的合法性
+//        String token = request.getHeader("Authorization");
+//        DecodedJWT verify = PCJwtUtils.verify(token);
+//        //验证成功则获取用户名
+//        map.put("mobile",verify.getClaim("mobile").asString());
+//        map.put("state",1);
+//        log.info("登录成功");
+//        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, map);
+//
+//        return res;
+//    }
 
 
     @ApiOperation("增加一条用户信息")
@@ -172,6 +264,17 @@ public class UserController {
         log.info("users====>"+users);
         MyPage page = this.userService.searchUser(pageNo, limit, idSort,users);
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, page);
+        return res;
+    }
+
+    @ApiOperation("根据id查询信息")
+    @GetMapping("/id")
+    public ResultResponse queryUreteralDataById(@RequestParam("id") Integer id,@RequestParam("page") int pageNo, @RequestParam("limit") int limit, @RequestParam("sort") String idSort){
+        ResultResponse res = null;
+        List<Map> info = userMapper.selectById(id);
+        log.info("info====>"+info);
+        MyPage page = this.userService.searchById(pageNo, limit, idSort,info);
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK,page);
         return res;
     }
 

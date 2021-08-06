@@ -11,6 +11,7 @@ import priv.ljh.utils.MyPage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -56,6 +57,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         page = new MyPage(pcUsersList.subList(beginIndex, endIndex), total);
+
+        return page;
+    }
+
+    @Override
+    public MyPage searchById(int pageNo, int limit, String idSorted, List<Map> users) {
+        MyPage page = null;
+        List<Map> infoList = new ArrayList<>();
+        infoList.addAll(users);
+        if(idSorted != null && idSorted.startsWith("-")){
+            Collections.reverse(infoList);
+        }
+        int total = infoList.size();
+        int maxPageNo = infoList.size()%limit == 0? infoList.size()/limit:infoList.size()/limit + 1;
+        if(pageNo>maxPageNo){
+            pageNo = maxPageNo;
+        }
+        int beginIndex = (pageNo-1)*limit;
+        int endIndex = pageNo*limit;
+        if(endIndex>total){
+            endIndex = total;
+        }
+
+        page = new MyPage(infoList.subList(beginIndex, endIndex), total);
 
         return page;
     }

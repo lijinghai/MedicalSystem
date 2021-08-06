@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import priv.ljh.utils.MyPage;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,4 +27,14 @@ public interface UserService extends IService<User> {
      * @return
      */
     public MyPage searchUser(int pageNo, int limit, String idSorted, List<User> Users);
+
+    /**
+     * 根据id查询
+     * @param pageNo
+     * @param limit
+     * @param idSorted
+     * @param users
+     * @return
+     */
+    public MyPage searchById(int pageNo, int limit, String idSorted, List<Map> users);
 }

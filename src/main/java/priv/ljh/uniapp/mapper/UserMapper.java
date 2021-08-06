@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import priv.ljh.uniapp.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  *  Mapper 接口
@@ -50,4 +53,12 @@ public interface UserMapper extends BaseMapper<User> {
      */
     @Select("select id from user where account = #{account}")
     int selectId(@Param("account") String account);
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    @Select("select * from user where id  = #{id}")
+    List<Map> selectById(@Param("id") Integer id);
 }

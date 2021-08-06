@@ -50,7 +50,7 @@ public class User implements Serializable {
     private Integer roleType;
 
     @ApiModelProperty(value = "性别(男：1；女：2)")
-    private Integer sex;
+    private String sex;
 
     @ApiModelProperty(value = "年龄")
     private Integer age;
@@ -60,5 +60,8 @@ public class User implements Serializable {
 
     @ApiModelProperty(value = "邮箱")
     private String email;
+
+    @ApiModelProperty(value = "头像")
+    private String avatar;
 
 }
