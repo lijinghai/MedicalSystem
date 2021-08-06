@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="priv.ljh.uniapp.mapper.UserMapper">
 
+    <!--判断用户名是否存在-->
+    <select id="selectCount"  resultType="Integer"  parameterType="String">
+        select count(*) from user where mobile = #{mobile};
+    </select>
+
 </mapper>

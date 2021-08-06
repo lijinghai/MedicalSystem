@@ -18,6 +18,7 @@ import java.util.Map;
  * Druid 自定义配置
  * @author lijinghai
  * @Date 2021-1-19
+ * http://localhost:8091/druid/doc.html
  */
 @Configuration
 public class MyDruid {

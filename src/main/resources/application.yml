@@ -1,8 +1,11 @@
 spring:
   datasource:
     username: root
-    password: 101599
-    url: jdbc:mysql://localhost:3306/icms?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    password: '@Wxyabyt888'
+#    password: 101599
+    url: jdbc:mysql://42.192.231.74:3308/icms?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+#    url: jdbc:mysql://localhost:3306/icms?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+#    url: jdbc:mysql://192.168.0.5:3306/icms?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
@@ -44,3 +47,6 @@ allowed1:
 
 allowed2:
   origin2: http://localhost:8093
+
+allowed3:
+  origin3: http://127.0.0.1:41722
