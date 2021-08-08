@@ -138,13 +138,13 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>otdrinterface</groupId>
-            <artifactId>otdrinterface</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/otdrinterface.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>otdrinterface</groupId>-->
+<!--            <artifactId>otdrinterface</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${project.basedir}/lib/otdrinterface.jar</systemPath>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>net.sf.json-lib</groupId>
