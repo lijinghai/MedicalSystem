@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import priv.ljh.uniapp.entity.RenalData;
 import priv.ljh.uniapp.entity.UreteralData;
+import priv.ljh.uniapp.entity.UrineData;
 import priv.ljh.uniapp.mapper.RenalDataMapper;
 import priv.ljh.uniapp.mapper.UreteralDataMapper;
 import priv.ljh.uniapp.service.RenalDataService;
@@ -53,6 +54,18 @@ public class UreteralDataController {
         // 获取
         int id1 = (int) context.getAttribute("id");
         ureteralDataMapper.insertUreteral(id1);
+        ureteralData.getId();
+        log.info("id========>"+ureteralData.getId());
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, ureteralData);
+        return res;
+    }
+
+    @ApiOperation("根据id增加一条信息")
+    @PostMapping("/id")
+    public ResultResponse create(@RequestBody UreteralData ureteralData, HttpServletRequest request, @RequestParam("id") Integer id){
+        ResultResponse res = null;
+
+        ureteralDataMapper.insertUreteral(id);
         ureteralData.getId();
         log.info("id========>"+ureteralData.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, ureteralData);
