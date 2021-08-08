@@ -65,13 +65,13 @@ public class UrineDataController {
 
     @ApiOperation("根据id增加一条信息")
     @PostMapping("/id")
-    public ResultResponse create(@RequestBody BladderData bladderData, HttpServletRequest request, @RequestParam("id") Integer id){
+    public ResultResponse create(@RequestBody UrineData urineData, HttpServletRequest request, @RequestParam("id") Integer id){
         ResultResponse res = null;
 
         urineDataMapper.insertUrine(id);
-        bladderData.getId();
-        log.info("id========>"+bladderData.getId());
-        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, bladderData);
+        urineData.getId();
+        log.info("id========>"+urineData.getId());
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, urineData);
         return res;
     }
 
