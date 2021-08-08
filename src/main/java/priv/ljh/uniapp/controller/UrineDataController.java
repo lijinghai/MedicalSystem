@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import priv.ljh.uniapp.entity.BladderData;
 import priv.ljh.uniapp.entity.UrineData;
 import priv.ljh.uniapp.entity.User;
 import priv.ljh.uniapp.mapper.UrineDataMapper;
@@ -59,6 +60,18 @@ public class UrineDataController {
         urineData.getId();
         log.info("id========>"+urineData.getId());
         res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, urineData);
+        return res;
+    }
+
+    @ApiOperation("根据id增加一条信息")
+    @PostMapping("/id")
+    public ResultResponse create(@RequestBody BladderData bladderData, HttpServletRequest request, @RequestParam("id") Integer id){
+        ResultResponse res = null;
+
+        urineDataMapper.insertUrine(id);
+        bladderData.getId();
+        log.info("id========>"+bladderData.getId());
+        res = new ResultResponse(Constants.STATUS_OK, Constants.MESSAGE_OK, bladderData);
         return res;
     }
 
