@@ -25,13 +25,13 @@
 
 ### 项目介绍 :book:
 
-👉基于Springboot+vue+uni-app的医疗管理系统. 含平台主体微信小程序和web后台数据管理平台.
+👉基于Springboot + vue + uni-app的医疗管理系统. 含平台主体微信小程序和web后台数据管理平台.
 
-* 
+
 
 ### 项目技术栈 :star:
 
-- 微信小程序(MedicalSystem_uniapp)：uni-app + Vue.js
+- 微信小程序(MedicalSystem_uniapp)：uni-app + Vue.js 
 
 
 - 后台管理系统(MedicalSystem_Web)：基于Vue-admin-ui脚手架
@@ -41,11 +41,11 @@
 
 项目采用前后端分离开发模式， 小程序使用Uni-app开发，后端数据API采用Java、Spring-Boot开发.
 
-小程序端code地址：
+小程序端code地址：https://github.com/Dorian1015/MedicalSystem_uniapp
 
-后端code地址：
+后端code地址：https://github.com/Dorian1015/MedicalSystem
 
-web管理端code地址: 
+web管理端code地址: 正在开发中(基于Springboot + vue 前后端分离)
 
 ### 体验地址
 
@@ -167,74 +167,143 @@ web管理端code地址:
 
 - #### 注册页面
 
-  ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/注册.jpg)
+  | 第一版本                                                     |          | 升级版(2021 8  10)                                           |
+  | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
+  | ![](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/注册.jpg) | =======> | ![](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/zhuce.png) |
+
+  
 
 - #### 登录页面
 
-![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/登录.jpg)
+
+
+| 第一版本                                                     |           | 升级版(2021 8  10)                                           |
+| ------------------------------------------------------------ | --------- | ------------------------------------------------------------ |
+| ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/登录.jpg) | ========> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/denglu.png) |
+
+
 
 - #### 首页页面
 
+  | 第一版本                                                     |          | 升级版(2021 8  10)                                           |
+  | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/首页.jpg) | =======> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/shouye.png) |
 
-  ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/首页.jpg)
+  
+
+
+
 
 - #### 病理参数页面
 
-![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/病理参数.jpg)
+  | 第一版本                                                     |            | 升级版(2021 8  10)                                           |
+  | ------------------------------------------------------------ | ---------- | ------------------------------------------------------------ |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/病理参数.jpg) | =========> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/bin.png) |
+
+  
+
+
 
 - #### 膀胱动力学页面
 
-  ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/膀胱动力学.jpg)
+  | 第一版本                                                     |                              | 升级版(2021 8  10)                                           |
+  | ------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------ |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/膀胱动力学.jpg) | ===========================> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/pan.png) |
+
+  
 
   - #### 添加参数页面
 
-    ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/膀胱添加.jpg)
+    | 第一版本                                                     |                       | 升级版(2021 8  10)                                           |
+    | ------------------------------------------------------------ | --------------------- | ------------------------------------------------------------ |
+    | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/膀胱添加.jpg) | ====================> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/pan.png) |
+    
+    
 
 - #### 尿常规页面
 
-  ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/尿常规.jpg)
+  | 第一版本                                                     |                                   | 升级版(2021 8  10)                                           |
+  | ------------------------------------------------------------ | --------------------------------- | ------------------------------------------------------------ |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/尿常规.jpg) | ================================> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/niao.png) |
+
+  
 
   - #### 添加
 
-  ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/尿常规添加.jpg)
+  | 第一版本                                                     |                       | 升级版(2021 8  10)                                           |
+  | ------------------------------------------------------------ | --------------------- | ------------------------------------------------------------ |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/尿常规添加.jpg) | ====================> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/niao.png) |
+
+  
 
 - #### 事件管理
 
-  ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/事件管理.jpg)
+  | 第一版本                                                     |                          | 升级版(2021 8  10)                                           |
+  | ------------------------------------------------------------ | ------------------------ | ------------------------------------------------------------ |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/事件管理.jpg) | =======================> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/shi.png) |
+
+  
 
   - #### 餐饮事件
 
-    ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮事件.jpg)
+    | 第一版本                                                     |                          | 升级版(2021 8  10)                                           |
+    | ------------------------------------------------------------ | ------------------------ | ------------------------------------------------------------ |
+    | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮事件.jpg) | =======================> | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/can.png) |
 
     
 
     - #### 添加
 
-    ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮事件0.jpg)
+    |                                                              |                                                              |
+    | ------------------------------------------------------------ | ------------------------------------------------------------ |
+    | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮事件0.jpg) | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮事件1.jpg) |
+    |                                                              |                                                              |
+    | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮事件1.jpg) | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮添加2.jpg) |
+    |                                                              |                                                              |
 
-    ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮事件1.jpg)
+    
 
-    ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮事件1.jpg)
+    
 
-    ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/餐饮添加2.jpg)
+    
 
   - #### 导尿事件
 
-    ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/导尿事件.jpg)
+    | 更多操作![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/导尿事件.jpg) |
+    | ------------------------------------------------------------ |
+    
+    
     
     - #### 添加
     
-    ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/导尿添加.jpg)
+    | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/导尿添加.jpg) |
+    | ------------------------------------------------------------ |
+    
+    
 
 - #### 事件报表
 
-  ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/事件报表.jpg)
+  |                                                              |
+  | ------------------------------------------------------------ |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/事件报表.jpg) |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/事件报表0.jpg) |
+  | ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/事件报表1.jpg) |
   
+  #### 个人中心
   
+  ![](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/ge.png)
   
-  ![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/事件报表0.jpg)
-
-![img](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/事件报表1.jpg)
+  #### 用户详情
+  
+  ![](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/yong.png)
+  
+  #### 编辑资料
+  
+  ![](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/bian.png)
+  
+  #### 设置
+  
+  ![](https://cdn.jsdelivr.net/gh/Dorian1015/cdn/img/MedicalSystem/set.png)
 
 
 
